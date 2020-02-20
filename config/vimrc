@@ -1,0 +1,76 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim setting
+"set expandtab
+"set smarttab
+"set shiftwidth=4
+"set tabstop=4
+"set autoindent
+autocmd BufNewFile, BufRead *.c, *.cpp, *.java :CFOLD
+
+set hlsearch
+
+map <silent> <F8> :cscope reset<cr>
+map <silent> <F7> :noh<cr>
+map <silent> <F5> :copen<cr>
+map <silent> <F6> :cclose<cr>
+map <silent> <F4> :cp<cr>
+map <silent> <F3> :cn<cr>
+
+map <silent> <F9> :!cscope -b<cr>
+\:cs reset<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cscope setting
+if has("cscope")
+  set csprg=/usr/bin/cscope              "指定用来执行 cscope 的命令
+  set csto=1                             "先搜索tags标签文件，再搜索cscope数据库
+  set cst                                "使用|:cstag|(:cs find g)，而不是缺省的:tag
+  set nocsverb                           "不显示添加数据库是否成功
+
+" add any database in current directory
+if filereadable("cscope.out")
+  cs add cscope.out
+endif
+  set csverb                             "显示添加成功与否
+
+
+endif
+
+  set nocsverb
+
+nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-@>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ctags setting
+set tags=./tags,./../tags,./*/tags;
+
+" Tag list (ctags)
+
+filetype on                            "文件类型自动检测
+
+" if MySys() == "windows"                "设定windows系统中ctags程序的位置
+"   let Tlist_Ctags_Cmd = 'ctags'
+" elseif MySys() == "linux"              "设定linux系统中ctags程序的位置
+  let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+" endif
+
+let Tlist_Show_One_File = 1            "不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Exit_OnlyWindow = 1          "如果taglist窗口是最后一个窗口，则退出vim
+let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist窗口 
+  
+"在映射F8键打开tags窗口
+map <silent> <F8> :TlistToggle<cr> 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

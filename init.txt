@@ -1,0 +1,11 @@
+1.install apt
+  git
+  cscope
+  python
+
+2.config file
+  .vimrc
+  .gitconfig
+
+3. bin
+   toolchains.sh
