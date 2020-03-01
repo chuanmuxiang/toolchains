@@ -24,11 +24,20 @@ logger_err()
    echo "[$time][err]: $1"
 }
 
+tool_debug()
+{
+    while true; do
+    sleep 1;
+    logger_info "$*";
+    eval "$*";
+    done
+}
+
 tool_build()
 {
    project_path="${CODE_PATH}$1"
    logger_info "build {project: $1, path: \"${project_path}\"}"
-   find ${project_path} -name "*.c" -o -name "*.h" -o -name "*.sh" > ./cscope.files  2>/dev/null
+   find ${project_path} -name "*.c" -o -name "*.h" -o -name "*.sh" -o -name "*.py" > ./cscope.files  2>/dev/null
    cscope -bkq -i "./cscope.files" 2>/dev/null
 }
 case $1 in
@@ -36,6 +45,10 @@ case $1 in
     curpath=`pwd`
     project=`basename $curpath`
     tool_build $project
+  ;;
+  "--debug" | "-d")
+    shift
+    tool_debug  "$*"
   ;;
   "--help"|*)
     tool_usage
