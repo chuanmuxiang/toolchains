@@ -50,6 +50,10 @@ case $1 in
     shift
     tool_debug  "$*"
   ;;
+  "--python" | "-p")
+    shift
+    tool_debug "python $*"
+  ;;
   "--help"|*)
     tool_usage
 #    logger_err "envaild command, {command: $1}"
