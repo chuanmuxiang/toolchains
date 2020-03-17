@@ -36,10 +36,11 @@ tool_debug()
 tool_build()
 {
    project_path="${CODE_PATH}$1"
-   logger_info "build {project: $1, path: \"${project_path}\"}"
+   logger_info "build {project: $1, source: \"${project_path}\"}"
    find ${project_path} -name "*.c" -o -name "*.h" -o -name "*.sh" -o -name "*.py" > ./cscope.files  2>/dev/null
    cscope -bkq -i "./cscope.files" 2>/dev/null
 }
+
 case $1 in
   "--build" | "-b")
     curpath=`pwd`
@@ -53,6 +54,10 @@ case $1 in
   "--python" | "-p")
     shift
     tool_debug "python $*"
+  ;;
+  "--python3" | "-p3")
+    shift
+    tool_debug "python3 $*"
   ;;
   "--help"|*)
     tool_usage
