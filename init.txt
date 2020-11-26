@@ -1,11 +1,9 @@
-1.install apt
-  git
-  cscope
-  python
+#step 1:install apt
+sudo apt-get  install git
+sudo apt-get install  cscope
+#  python
 
-2.config file
-  .vimrc
-  .gitconfig
-
-3. bin
-   toolchains.sh
+#step 2:copy  file
+sudo cp ./config/vimrc  ~/.vimrc
+sudo cp ./bin/toolchains.sh /usr/sbin/
+#  .gitconfig
